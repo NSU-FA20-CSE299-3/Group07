@@ -24,7 +24,7 @@ class Home extends Component {
     }]
 
     render() {
-    let recentOffers = this.offers.map(offer => <OfferPost offer={offer}/>);
+    let recentOffers = this.offers.map(offer => <OfferPost key={offer.offerId} offer={offer}/>);
 
 
         return (

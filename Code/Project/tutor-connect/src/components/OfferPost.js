@@ -8,7 +8,7 @@ class OfferPost extends Component {
     render() {
         const {offer : {offerId, userName, schoolMedium, schoolClass, details, offerLocation}} = this.props;
         return (
-            <Card>
+            <Card className="card">
                 <CardContent>
                     <Typography variant="h5" component="h2">
                     {userName}
