@@ -15,15 +15,15 @@ import Signup from './pages/signup';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#c158dc',
-      main: '#8e24aa',
-      dark:'#5c007a',
+      light: '#7953d2',
+      main: '#4527a0',
+      dark:'#000070',
       contrastText: '#fff'
     },
     secondary: {
-      light: '#6746c3',
-      main: '#6a1b9a',
-      dark:'#000063',
+      light: '#534bae',
+      main: '#1a237e',
+      dark:'#000051',
       contrastText: '#fff'
     },
   },
