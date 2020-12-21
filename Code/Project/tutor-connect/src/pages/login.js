@@ -1,37 +1,101 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+//Material UI Components
+import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 
+const styles = {
+    form: {
+        textAlign: 'center'
+    },
+    pageTitle: {
+        textAlign: 'center'
+    },
+    textField: {
+        marginTop: '20px'
+    },
+    button: {
+        margin: '20px auto 20px auto'
+    }
+}
 
 class Login extends Component {
+    constructor() {
+        super();
+        this.state = {
+          email: '',
+          password: '',
+          errors: {}
+        };
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const userData = {
+          email: this.state.email,
+          password: this.state.password
+        };
+
+        console.log(userData);
+      };
+
+    handleChange = (event) => {
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+    };
+
+
     render() {
+        const { classes } = this.props;
+
         return (
             <Grid container>
                 <Grid item sm></Grid>
                 <Grid item sm>
-                    <form noValidate className="loginForm">
-                        <h2>Login</h2>
-                        <div className="formTextField">
-                            <TextField
-                                required
-                                id="outlined-required"
-                                label="Email"
-                                defaultValue="Hello World"
-                                variant="outlined"
-                            />
-                        </div>
-                        <div className="formTextField">
-                            <TextField
-                                id="outlined-password-input"
-                                label="Password"
-                                type="password"
-                                autoComplete="current-password"
-                                variant="outlined"
-                            />
-                        </div>
-                        <Button variant="contained" color="primary">Login</Button>
-                    </form>
+                <Typography variant="h2" className={classes.pageTitle}>
+                    Login
+                </Typography>
+                <form noValidate onSubmit={this.handleSubmit}>
+                    <TextField
+                        id="email"
+                        name="email"
+                        type="email"
+                        label="Email"
+                        className={classes.textField}
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                        fullWidth
+                    />
+
+                    <TextField
+                        id="password"
+                        name="password"
+                        type="password"
+                        label="Password"
+                        className={classes.textField}
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                        fullWidth
+                    />
+                    
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                    >
+                    Login
+                    </Button>
+            <br />
+            <small>
+              dont have an account ? sign up <Link to="/signup">here</Link>
+            </small>
+        </form>
                 </Grid>
                 <Grid item sm></Grid>  
             </Grid>
@@ -39,4 +103,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default withStyles(styles)(Login)
