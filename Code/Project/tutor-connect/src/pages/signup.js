@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import firebaseApp from '../firebase';
+
 //Material UI Components
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField';
@@ -31,7 +33,7 @@ class Signup extends Component {
           password: '',
           confirmPassword: '',
           username: '',
-          errors: {}
+          errors: []
         };
     }
 
@@ -45,7 +47,18 @@ class Signup extends Component {
         };
 
         console.log(userData);
-      };
+        
+        firebaseApp.auth().createUserWithEmailAndPassword(userData.email, userData.password)
+            .then((u) => {console.log(u)})
+            .catch((err) => {
+                console.log(err);
+
+                const errorMessages = this.state.errors.concat(err.message);
+                this.setState({errors: errorMessages});
+            });
+
+        console.log(this.state.errors);
+    };
 
     handleChange = (event) => {
         this.setState({
