@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
+import firebaseApp from '../firebase';
 
 //Material UI Components
 import Typography from '@material-ui/core/Typography'
@@ -41,6 +42,10 @@ class Login extends Component {
         };
 
         console.log(userData);
+
+        firebaseApp.auth().signInWithEmailAndPassword(userData.email, userData.password)
+            .then((u) => {console.log(u)})
+            .catch((err) => {console.log(err)})
       };
 
     handleChange = (event) => {
