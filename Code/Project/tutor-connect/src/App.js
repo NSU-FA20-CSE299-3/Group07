@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import firebaseApp from './firebase';
 
 //Components
 import Navbar from './components/Navbar';
@@ -30,6 +31,30 @@ const theme = createMuiTheme({
 })
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      user: {}
+    }
+  }
+
+  componentDidMount(){
+    this.authListener();
+  }
+
+  authListener() {
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.setState({user})
+      }
+      else {
+        this.setState({user: null})
+      }
+    });
+
+    console.log(this.state.user);
+  }
+
   render() {
     return (
      <MuiThemeProvider theme={theme}>

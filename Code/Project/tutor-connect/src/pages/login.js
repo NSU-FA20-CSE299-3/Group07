@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import firebaseApp from '../firebase';
 
@@ -30,8 +30,24 @@ class Login extends Component {
         this.state = {
           email: '',
           password: '',
-          errors: {}
+          errors: ''
         };
+    }
+
+    //Firebase Login Authentication
+    async login(email, password) {
+        this.setState({errors: ''});
+        await firebaseApp.auth().signInWithEmailAndPassword(email, password)
+            .then((u) => {console.log(u.user.uid)})
+            .catch((err) => {
+                if (err.code === "auth/wrong-password") {
+                    this.setState({errors: "Password is invalid."})
+                } else {
+                    this.setState({errors: err.message})
+                }
+            });
+
+            console.log(this.state.errors);
     }
 
     handleSubmit = (event) => {
@@ -43,10 +59,8 @@ class Login extends Component {
 
         console.log(userData);
 
-        firebaseApp.auth().signInWithEmailAndPassword(userData.email, userData.password)
-            .then((u) => {console.log(u)})
-            .catch((err) => {console.log(err)})
-      };
+        this.login(userData.email, userData.password);
+    };
 
     handleChange = (event) => {
         this.setState({
@@ -97,6 +111,7 @@ class Login extends Component {
                     Login
                     </Button>
             <br />
+            <Typography variant="body1" color="error">{this.state.errors}</Typography>
             <small>
               dont have an account ? sign up <Link to="/signup">here</Link>
             </small>
