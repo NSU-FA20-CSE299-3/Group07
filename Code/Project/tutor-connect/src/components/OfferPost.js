@@ -11,20 +11,20 @@ class OfferPost extends Component {
             <Card className="card">
                 <CardContent>
                     <Typography variant="h5" component="h2" color="primary">
-                    {displayName}
+                        {displayName}
                     </Typography>
                     <Typography variant="body2" component="p">
-                    Medium/Version: {schoolMedium}
-                    <br />
-                    Class: {schoolClass}
-                    <br />
-                    Subjects: {description}      Duration: {duration} days a week
-                    <br />
-                    Location: {location}
-                    <br />
-                    Salary: {salary} per month
-                    <br />
-                    Answers: {answerCount}
+                        Medium/Version: {schoolMedium}
+                        <br />
+                        Class: {schoolClass}
+                        <br />
+                        Subjects: {description}      Duration: {duration} days a week
+                        <br />
+                        Location: {location}
+                        <br />
+                        Salary: {salary} per month
+                        <br />
+                        Answers: {answerCount}
                     </Typography>
                 </CardContent>
             </Card>

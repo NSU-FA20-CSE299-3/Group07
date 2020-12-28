@@ -3,6 +3,8 @@ import OfferPost from '../components/OfferPost';
 import Grid from '@material-ui/core/Grid';
 import firebaseApp from '../firebase';
 
+import NewOfferForm from '../components/NewOfferForm';
+
 class Home extends Component {
 
     constructor(props) {
@@ -33,8 +35,8 @@ class Home extends Component {
                     <h1>Home Page</h1>
                     <div>{recentOffers}</div>
                 </Grid>
-                <Grid item sm={4} xs={12}>
-                    <p>Profile</p>
+                <Grid item sm={6} xs={12}>
+                    <NewOfferForm />
                 </Grid>
 
             </Grid>
