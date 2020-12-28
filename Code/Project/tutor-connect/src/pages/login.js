@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import firebaseApp from '../firebase';
 
@@ -34,11 +34,12 @@ class Login extends Component {
         };
     }
 
+
     //Firebase Login Authentication
     async login(email, password) {
         this.setState({errors: ''});
         await firebaseApp.auth().signInWithEmailAndPassword(email, password)
-            .then((u) => {console.log(u.user.uid)})
+            .then()
             .catch((err) => {
                 if (err.code === "auth/wrong-password") {
                     this.setState({errors: "Password is invalid."})
@@ -46,8 +47,6 @@ class Login extends Component {
                     this.setState({errors: err.message})
                 }
             });
-
-            console.log(this.state.errors);
     }
 
     handleSubmit = (event) => {
@@ -56,8 +55,6 @@ class Login extends Component {
           email: this.state.email,
           password: this.state.password
         };
-
-        console.log(userData);
 
         this.login(userData.email, userData.password);
     };

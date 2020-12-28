@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
 import OfferPost from '../components/OfferPost';
 import Grid from '@material-ui/core/Grid';
+import firebaseApp from '../firebase';
 
 class Home extends Component {
 
-    offers = [{
-        offerId: 1,
-        userId: 1,
-        userName: "user1",
-        schoolMedium: "English",
-        schoolClass: "8",
-        details: "Maths, F.P. Maths, Physics, Chemistry, Biology",
-        offerLocation: "Gulshan" 
-    },
-    {
-        offerId: 2,
-        userId: 2,
-        userName: "samiya",
-        schoolMedium: "Bangla",
-        schoolClass: "5",
-        details: "Maths",
-        offerLocation: "Moghbazar" 
-    }]
+    constructor(props) {
+        super(props);
+        this.state = {offers: []}
+    }
+
+
+    //Fetch recent offers from Firestore
+    async getRecentOffers() {
+        const db = firebaseApp.firestore();
+        await db.collection("offers").get()
+            .then((querySnapshot) => {
+                const offersSet = querySnapshot.docs.map(doc => doc.data());
+                this.setState({offers: offersSet});
+            })
+            .catch((err) => {console.log(err)});
+    }
 
     render() {
-    let recentOffers = this.offers.map(offer => <OfferPost key={offer.offerId} offer={offer}/>);
-
+    
+        this.getRecentOffers();
+        let recentOffers = this.state.offers.map(offer => <OfferPost key={offer.offerID} offer={offer}/>);
 
         return (
             <Grid container>

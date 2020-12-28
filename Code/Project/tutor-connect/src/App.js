@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
@@ -51,20 +51,19 @@ class App extends Component {
         this.setState({user: null})
       }
     });
-
-    console.log(this.state.user);
   }
+
 
   render() {
     return (
      <MuiThemeProvider theme={theme}>
       <div className="App">
         <Router>
-          <Navbar />
+          <Navbar currentUser={this.state.user}/>
           <div className="container">
             <Switch>
               <Route path="/" exact component={Home}/>
-              <Route path="/login" component={Login}/>
+              <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup}/>
             </Switch>
           </div>
