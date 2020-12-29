@@ -4,13 +4,33 @@ import Grid from '@material-ui/core/Grid';
 import firebaseApp from '../firebase';
 
 import NewOfferForm from '../components/NewOfferForm';
+import HomePageCard from '../components/HomePageCard';
 
 class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {offers: []}
+        this.state = {
+            offers: [],
+            user: {}
+        }
     }
+
+
+    componentDidMount(){
+    this.authListener();
+  }
+
+  authListener() {
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.setState({user})
+      }
+      else {
+        this.setState({user: null})
+      }
+    });
+  }
 
 
     //Fetch recent offers from Firestore
@@ -36,7 +56,7 @@ class Home extends Component {
                     <div>{recentOffers}</div>
                 </Grid>
                 <Grid item sm={6} xs={12}>
-                    <NewOfferForm />
+                    {this.state.user ? (<NewOfferForm />) : (<HomePageCard />)}
                 </Grid>
 
             </Grid>
