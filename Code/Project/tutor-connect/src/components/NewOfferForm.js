@@ -41,8 +41,29 @@ class NewOfferForm extends Component {
     }
 
 
+    async postNewOffer() {
+        const postData = {
+            userID: this.props.currentUserID,
+            displayName: this.state.displayName,
+            schoolMedium: this.state.schoolMedium,
+            schoolClass: this.state.schoolClass,
+            description: this.state.description,
+            location: this.state.location,
+            salary: this.state.salary,
+            duration: this.state.duration,
+            answerCount: 0
+        }
+
+        const db = firebaseApp.firestore();
+        await db.collection("offers").add(postData)
+            .then((docRef) => {console.log(docRef)})
+            .catch((err) => {console.log(err)});
+    }
+
+
     handleSubmit = (event) => {
         event.preventDefault();
+        this.postNewOffer();
     }
 
 
