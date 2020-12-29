@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import firebaseApp from '../firebase';
+
+
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,6 +17,7 @@ class NewOfferForm extends Component {
         super(props);
 
         this.state = {
+            displayName: '',
             schoolMedium: '',
             schoolClass: '',
             description: '',
@@ -23,6 +27,25 @@ class NewOfferForm extends Component {
         }
     }
 
+
+    async setUserDisplayName(id) {
+        
+        const db = firebaseApp.firestore();
+        const snapshot = await db.collection("users").doc(id).get();
+        const data = snapshot.data();
+        const firstName = data.firstName;
+        const lastName = data.lastName;
+        const displayName = firstName.concat(' ', lastName);
+        this.setState({displayName: displayName});
+        return;
+    }
+
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+    }
+
+
     handleChange = (event) => {
         this.setState({
           [event.target.name]: event.target.value
@@ -30,50 +53,41 @@ class NewOfferForm extends Component {
     };
 
     render() {
+        if(this.state.displayName === '' && this.props.currentUserID) {
+            this.setUserDisplayName(this.props.currentUserID);
+        }
+
         return (
             <Grid container >
                 <Grid item sm={2} ></Grid>
                 <Grid item sm={8} >
                     <Card className="card">
                         <CardContent >
+                            <h1>Welcome, {this.state.displayName}!</h1>
                             <Typography variant="h4">Make a New Offer</Typography>
-                            <form >
+                            <form noValidate onSubmit={this.handleSubmit}>
 
-                                <TextField 
-                                    id="schoolMedium" 
+                                <TextField
+                                    id="schoolMedium"
+                                    name="schoolMedium"
+                                    type="text"
                                     label="Medium"
-                                    name="schoolMedium" 
+                                    variant="outlined"
                                     value={this.state.schoolMedium}
                                     onChange={this.handleChange}
-                                    select
-                                    fullWidth>
-                                        <MenuItem value="Bangla">Bangla</MenuItem>
-                                        <MenuItem value="English Version">English Version</MenuItem>
-                                        <MenuItem value="English - Edexcel">English - Edexcel</MenuItem>
-                                        <MenuItem value="English - Cambridge">English - Cambridge</MenuItem>
-                                </TextField>
+                                    fullWidth
+                                />
 
-                                <TextField 
-                                    id="schoolClass" 
+                                <TextField
+                                    id="schoolClass"
+                                    name="schoolClass"
+                                    type="text"
                                     label="Class"
-                                    name="schoolClass" 
+                                    variant="outlined"
                                     value={this.state.schoolClass}
                                     onChange={this.handleChange}
-                                    select
-                                    fullWidth>
-                                        <MenuItem value="I">I</MenuItem>
-                                        <MenuItem value="II">II</MenuItem>
-                                        <MenuItem value="III">III</MenuItem>
-                                        <MenuItem value="IV">IV</MenuItem>
-                                        <MenuItem value="V">V</MenuItem>
-                                        <MenuItem value="VI">VI</MenuItem>
-                                        <MenuItem value="VII">VII</MenuItem>
-                                        <MenuItem value="VIII">VIII</MenuItem>
-                                        <MenuItem value="IX">IX</MenuItem>
-                                        <MenuItem value="X">X</MenuItem>
-                                        <MenuItem value="XI">XI</MenuItem>
-                                        <MenuItem value="XII">XII</MenuItem>
-                                </TextField>
+                                    fullWidth
+                                />
 
                                 <TextField
                                     id="description"

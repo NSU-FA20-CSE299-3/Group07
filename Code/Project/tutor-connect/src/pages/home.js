@@ -45,7 +45,6 @@ class Home extends Component {
     }
 
     render() {
-    
         this.getRecentOffers();
         let recentOffers = this.state.offers.map(offer => <OfferPost key={offer.offerID} offer={offer}/>);
 
@@ -56,7 +55,7 @@ class Home extends Component {
                     <div>{recentOffers}</div>
                 </Grid>
                 <Grid item sm={6} xs={12}>
-                    {this.state.user ? (<NewOfferForm />) : (<HomePageCard />)}
+                    {this.state.user ? (<NewOfferForm currentUserID={this.state.user.uid} />) : (<HomePageCard />)}
                 </Grid>
 
             </Grid>
