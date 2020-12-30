@@ -31,7 +31,7 @@
 <p><em>Frontend:</em></p>
 <p>For the front-end I will use HTML, CSS, React, Redux and Material-UI. The web app will be compatible with both PC and mobile browsers. Redux will help with managing component states while Material-UI will ensure compatibility between platforms.</P>
 <p><em>Backend:</em></p>
-<p>For the backend of the web application, I will be using Express which is a minimalist backend web application framework for Node.js. I will use this to create a backend REST API.</p>
+<p>For the backend of the web application, I will be using Node.js to manage packages and scripts.</p>
 <p><em>Database:</em></p>
 <p>For the database aspect of the project I will use Firebase, more specifically Cloud Firestore. This will allow us to have a real-time NoSql database and provide login authentication.</p>
 <p>&nbsp;</p>
