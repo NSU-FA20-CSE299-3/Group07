@@ -2,13 +2,25 @@ import React, { Component } from 'react';
 import firebaseApp from '../firebase';
 
 
+import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+
+
+const styles = {
+    textField: {
+        marginTop: '20px'
+    },
+    button: {
+        margin: '20px 0 20px auto'
+    }
+}
+
+const db = firebaseApp.firestore();
 
 
 class NewOfferForm extends Component {
@@ -24,13 +36,11 @@ class NewOfferForm extends Component {
             location: '',
             salary: 0,
             duration: 0
-        }
+        }   
     }
 
 
     async setUserDisplayName(id) {
-        
-        const db = firebaseApp.firestore();
         const snapshot = await db.collection("users").doc(id).get();
         const data = snapshot.data();
         const firstName = data.firstName;
@@ -54,9 +64,14 @@ class NewOfferForm extends Component {
             answerCount: 0
         }
 
-        const db = firebaseApp.firestore();
+        let currentOfferID = '';
+
         await db.collection("offers").add(postData)
-            .then((docRef) => {console.log(docRef)})
+            .then((docRef) => {currentOfferID = docRef.id})
+            .catch((err) => {console.log(err)});
+
+        await db.collection("offers").doc(currentOfferID)
+            .update({offerID: currentOfferID})
             .catch((err) => {console.log(err)});
     }
 
@@ -78,20 +93,22 @@ class NewOfferForm extends Component {
             this.setUserDisplayName(this.props.currentUserID);
         }
 
+        const { classes } = this.props;
+
         return (
             <Grid container >
                 <Grid item sm={2} ></Grid>
                 <Grid item sm={8} >
+                    <h1>Welcome, {this.state.displayName}!</h1>
                     <Card className="card">
                         <CardContent >
-                            <h1>Welcome, {this.state.displayName}!</h1>
-                            <Typography variant="h4">Make a New Offer</Typography>
+                            <Typography variant="h6">Make a New Offer</Typography>
                             <form noValidate onSubmit={this.handleSubmit}>
-
                                 <TextField
                                     id="schoolMedium"
                                     name="schoolMedium"
                                     type="text"
+                                    className={classes.textField}
                                     label="Medium"
                                     variant="outlined"
                                     value={this.state.schoolMedium}
@@ -103,6 +120,7 @@ class NewOfferForm extends Component {
                                     id="schoolClass"
                                     name="schoolClass"
                                     type="text"
+                                    className={classes.textField}
                                     label="Class"
                                     variant="outlined"
                                     value={this.state.schoolClass}
@@ -114,6 +132,7 @@ class NewOfferForm extends Component {
                                     id="description"
                                     name="description"
                                     type="text"
+                                    className={classes.textField}
                                     label="Description"
                                     variant="outlined"
                                     value={this.state.description}
@@ -125,6 +144,7 @@ class NewOfferForm extends Component {
                                     id="location"
                                     name="location"
                                     type="text"
+                                    className={classes.textField}
                                     label="Location"
                                     variant="outlined"
                                     value={this.state.location}
@@ -136,6 +156,7 @@ class NewOfferForm extends Component {
                                     id="salary"
                                     label="Salary"
                                     name="salary"
+                                    className={classes.textField}
                                     type="number"
                                     variant="outlined"
                                     InputLabelProps={{
@@ -150,6 +171,7 @@ class NewOfferForm extends Component {
                                     label="Duration"
                                     name="duration"
                                     type="number"
+                                    className={classes.textField}
                                     variant="outlined"
                                     InputLabelProps={{
                                         shrink: true,
@@ -157,11 +179,13 @@ class NewOfferForm extends Component {
                                     value={this.state.duration}
                                     onChange={this.handleChange}
                                 />
+                                <br />
 
                                 <Button
                                     type="submit"
                                     variant="contained"
                                     color="primary"
+                                    className={classes.button}
                                 >
                                     Post
                                 </Button>
@@ -176,4 +200,4 @@ class NewOfferForm extends Component {
 }
 
 
-export default NewOfferForm
+export default withStyles(styles)(NewOfferForm)
