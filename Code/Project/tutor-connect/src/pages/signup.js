@@ -29,35 +29,46 @@ class Signup extends Component {
     constructor() {
         super();
         this.state = {
+          firstName: '',
+          lastName:'',  
           email: '',
           password: '',
           confirmPassword: '',
-          username: '',
           errors: []
         };
+    }
+
+
+
+    async addUserToDatabase(userData) {
+        const db = firebaseApp.firestore();
+        await db.collection("users").doc(userData.userID).set(userData);
+
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         const userData = {
-          email: this.state.email,
-          password: this.state.password,
-          confirmPassword: this.state.confirmPassword,
-          username: this.state.username
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,  
+            email: this.state.email,
+            password: this.state.password,
+            confirmPassword: this.state.confirmPassword,
+            username: this.state.username
         };
-
-        console.log(userData);
         
+        let userID = '';
         firebaseApp.auth().createUserWithEmailAndPassword(userData.email, userData.password)
-            .then((u) => {console.log(u)})
+            .then((u) => {userID = u.uid})
             .catch((err) => {
                 console.log(err);
-
-                const errorMessages = this.state.errors.concat(err.message);
-                this.setState({errors: errorMessages});
             });
 
-        console.log(this.state.errors);
+        userData.userID = userID;
+
+        console.log(userData);
+
+        this.addUserToDatabase(userData);
     };
 
     handleChange = (event) => {
@@ -78,6 +89,26 @@ class Signup extends Component {
                     Sign Up
                 </Typography>
                 <form noValidate onSubmit={this.handleSubmit}>
+                     <TextField
+                        id="firstName"
+                        name="firstName"
+                        type="text"
+                        label="First Name"
+                        className={classes.textField}
+                        value={this.state.firstName}
+                        onChange={this.handleChange}
+                        fullWidth
+                    />
+                     <TextField
+                        id="lastName"
+                        name="lastName"
+                        type="text"
+                        label="Last Name"
+                        className={classes.textField}
+                        value={this.state.lastName}
+                        onChange={this.handleChange}
+                        fullWidth
+                    />
                     <TextField
                         id="email"
                         name="email"
@@ -87,6 +118,7 @@ class Signup extends Component {
                         value={this.state.email}
                         onChange={this.handleChange}
                         fullWidth
+                        required
                     />
 
                     <TextField
@@ -98,6 +130,7 @@ class Signup extends Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                         fullWidth
+                        required
                     />
 
                     <TextField
@@ -109,17 +142,7 @@ class Signup extends Component {
                         value={this.state.confirmPassword}
                         onChange={this.handleChange}
                         fullWidth
-                    />
-
-                    <TextField
-                        id="username"
-                        name="username"
-                        type="text"
-                        label="Username"
-                        className={classes.textField}
-                        value={this.state.username}
-                        onChange={this.handleChange}
-                        fullWidth
+                        required
                     />
                     
                     <Button
