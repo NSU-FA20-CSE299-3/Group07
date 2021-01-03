@@ -2,11 +2,18 @@ import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 
 class OfferPost extends Component {
+
+    async applyAnswer(offerID, userID, displayName) {
+        console.log("Clicked " + offerID);
+    }
+
+
     render() {
-        const {offer : {offerID, displayName, schoolMedium, schoolClass, description, location, salary, duration, answerCount}} = this.props;
+        const {offer : {offerID, userID, displayName, schoolMedium, schoolClass, description, location, salary, duration, answerCount}} = this.props;
         return (
             <Card className="card">
                 <CardContent>
@@ -26,6 +33,11 @@ class OfferPost extends Component {
                         <br />
                         Answers: {answerCount}
                     </Typography>
+                    <Button
+                        onClick={this.applyAnswer(offerID, userID, displayName)}
+                        variant="contained"
+                        color="primary"
+                    />
                 </CardContent>
             </Card>
         )
