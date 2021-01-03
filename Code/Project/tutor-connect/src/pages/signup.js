@@ -34,41 +34,41 @@ class Signup extends Component {
           email: '',
           password: '',
           confirmPassword: '',
+          userID:'',
           errors: []
         };
     }
 
 
 
-    async addUserToDatabase(userData) {
+    async addUserToDatabase() {
         const db = firebaseApp.firestore();
-        await db.collection("users").doc(userData.userID).set(userData);
 
-    }
+        await firebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then((u) => {
+                this.setState({userID: u.user.uid});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+
         const userData = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,  
             email: this.state.email,
             password: this.state.password,
             confirmPassword: this.state.confirmPassword,
-            username: this.state.username
+            userID: this.state.userID
         };
-        
-        let userID = '';
-        firebaseApp.auth().createUserWithEmailAndPassword(userData.email, userData.password)
-            .then((u) => {userID = u.uid})
-            .catch((err) => {
-                console.log(err);
-            });
 
-        userData.userID = userID;
+        await db.collection("users").doc(this.state.userID).set(userData);
 
-        console.log(userData);
+    }
 
-        this.addUserToDatabase(userData);
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.addUserToDatabase();
     };
 
     handleChange = (event) => {
