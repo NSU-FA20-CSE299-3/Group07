@@ -46,7 +46,7 @@ class Home extends Component {
 
     render() {
         this.getRecentOffers();
-        let recentOffers = this.state.offers.map(offer => <OfferPost key={offer.offerID} offer={offer}/>);
+        let recentOffers = this.state.offers.map(offer => <OfferPost key={offer.offerID} offer={offer} currentUser={this.state.user} />);
 
         return (
             <Grid container>
