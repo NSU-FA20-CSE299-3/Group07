@@ -10,6 +10,13 @@ import Button from '@material-ui/core/Button';
 
 class OfferPost extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            buttonDisable: false
+        }
+    }
 
     //Add answers to database
     async applyAnswer(offerID, userID, displayName) {
@@ -23,6 +30,14 @@ class OfferPost extends Component {
 
         await db.collection("answers").add(newAnswer)
             .then((snapshot) => console.log("Answer made with ID: " + snapshot.id));
+
+        this.setState({buttonDisable: true});
+
+        const newAnswerCount = this.props.offer.answerCount + 1;
+
+        await db.collection("offers").doc(this.props.offer.offerID)
+            .update({answerCount: newAnswerCount})
+            .catch((err) => {console.log(err)});
     }
 
 
@@ -55,6 +70,7 @@ class OfferPost extends Component {
                             onClick={() => this.applyAnswer(offerID, userID, displayName)}
                             variant="contained"
                             color="primary"
+                            disabled={this.state.buttonDisable}
                         > Apply </Button>) :
                         (<Typography variant="body2" component="p"> </Typography>)}
                     
