@@ -58,8 +58,11 @@ class Signup extends Component {
             lastName: this.state.lastName,  
             email: this.state.email,
             password: this.state.password,
-            confirmPassword: this.state.confirmPassword,
-            userID: this.state.userID
+            userID: this.state.userID,
+            bio: "",
+            education: "",
+            location: "",
+            phone: ""
         };
 
         await db.collection("users").doc(this.state.userID).set(userData);

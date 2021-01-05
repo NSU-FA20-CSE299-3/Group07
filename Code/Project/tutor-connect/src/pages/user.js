@@ -22,6 +22,18 @@ class User extends Component {
 		}
 	}
 
+	componentDidMount() {
+		this.getUserInfo();
+	}
+
+
+
+	//Fetch user information from Firestore
+	async getUserInfo() {
+		await db.collection("users").doc(this.state.userID).get()
+			.then((querySnapshot) => {this.setState({userInfo: querySnapshot.data()})})
+			.catch(err => console.log(err));
+	}
 
 	//Fetch user offers from Firestore
 	async getUserOffers() {
@@ -47,13 +59,21 @@ class User extends Component {
 		return (
 			<Grid container>
 				<Grid item sm={6} xs={12}>
+					<h1>User Info</h1>
 					<Card className="card">
                         <CardContent>
                             <Typography variant="h5" component="h2" color="primary">
-                                This is user: {this.props.match.params.userID}
+                                This is user: {this.state.userInfo.firstName} {this.state.userInfo.lastName}
                             </Typography>
+                            <br />
                             <Typography variant="body2" component="p">
-                                Profile info will go here!
+                                Bio: {this.state.userInfo.bio}
+                                <br />
+                                Education: {this.state.userInfo.education}
+                                <br />
+                                Email: {this.state.userInfo.email}
+                                <br />
+                                Phone: {this.state.userInfo.phone}
                             </Typography>
                         </CardContent>
                     </Card>
