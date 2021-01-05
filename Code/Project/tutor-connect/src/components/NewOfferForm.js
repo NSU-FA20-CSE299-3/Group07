@@ -64,12 +64,10 @@ class NewOfferForm extends Component {
             answerCount: 0
         }
 
-        let currentOfferID = '';
 
         await db.collection("offers").add(postData)
             .then((docRef) => {
-                currentOfferID = docRef.id;
-                this.setState = ({
+                this.setState({
                     schoolMedium: '',
                     schoolClass: '',
                     description: '',
@@ -78,10 +76,6 @@ class NewOfferForm extends Component {
                     duration: 0
                 });
             })
-            .catch((err) => {console.log(err)});
-
-        await db.collection("offers").doc(currentOfferID)
-            .update({offerID: currentOfferID})
             .catch((err) => {console.log(err)});
     }
 

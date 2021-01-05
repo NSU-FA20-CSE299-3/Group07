@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import firebaseApp from '../firebase';
 
-
+//Material UI Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -46,7 +47,7 @@ class OfferPost extends Component {
         return (
             <Card className="card">
                 <CardContent>
-                    <Typography variant="h5" component="h2" color="primary">
+                    <Typography variant="h5" component={Link} to={`/user/${userID}` } color="primary">
                         {displayName}
                     </Typography>
                     <br />

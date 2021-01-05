@@ -38,7 +38,11 @@ class Home extends Component {
         const db = firebaseApp.firestore();
         await db.collection("offers").get()
             .then((querySnapshot) => {
-                const offersSet = querySnapshot.docs.map(doc => doc.data());
+                const offersSet = querySnapshot.docs.map((doc) => {
+                    const data = doc.data();
+                    data.offerID = doc.id;
+                    return data;
+                });
                 this.setState({offers: offersSet});
             })
             .catch((err) => {console.log(err)});
@@ -46,7 +50,9 @@ class Home extends Component {
 
     render() {
         this.getRecentOffers();
-        let recentOffers = this.state.offers.map(offer => <OfferPost key={offer.offerID} offer={offer} currentUser={this.state.user} />);
+        let recentOffers = this.state.offers.map((offer) => {if (offer) { 
+                return (<OfferPost key={offer.offerID} offer={offer} currentUser={this.state.user} />);}
+            });
 
         return (
             <Grid container>

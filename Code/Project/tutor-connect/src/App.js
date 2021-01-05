@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
+import User from './pages/user';
 
 const theme = createMuiTheme({
   palette: {
@@ -65,6 +66,7 @@ class App extends Component {
               <Route path="/" exact component={Home}/>
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup}/>
+              <Route path="/user/:userID" component={User}/>
             </Switch>
           </div>
         </Router>
