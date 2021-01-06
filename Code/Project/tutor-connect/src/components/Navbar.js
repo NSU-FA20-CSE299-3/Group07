@@ -25,7 +25,10 @@ class Navbar extends Component {
                         (<Button color="inherit" component={Link} to="/login">Login</Button>)
                     }
 
-                    <Button color="inherit" component={Link} to="/signup">Signup</Button>
+                    {this.props.currentUser ? 
+                        (<Button color="inherit" component={Link} to={`/user/${this.props.currentUser.uid}`}>Profile</Button>) :
+                        (<Button color="inherit" component={Link} to="/signup">Signup</Button>)
+                    }
                 </Toolbar>
             </AppBar>
         )
