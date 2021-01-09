@@ -34,47 +34,55 @@ class Signup extends Component {
           email: '',
           password: '',
           confirmPassword: '',
-          userID:'',
-          errors: []
+          errors: ''
         };
     }
 
 
-    //Add user document to Firestore
-    async addUserToDatabase() {
+    //Add user to Firebase Authentication
+    async addUserToDatabase(userID) {
         const db = firebaseApp.firestore();
-
-        await firebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then((u) => {
-                this.setState({userID: u.user.uid});
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
 
         const userData = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,  
             email: this.state.email,
             password: this.state.password,
-            userID: this.state.userID,
+            userID: userID,
             bio: "",
             education: "",
             location: "",
             phone: ""
         };
 
-        await db.collection("users").doc(this.state.userID).set(userData)
+        await db.collection("users").doc(userID).set(userData)
             .then((u) => this.props.history.push("/"));
+    }
 
+
+
+    //Add user document to Cloud Firestore
+    async addUserToAuth() {
+        const db = firebaseApp.firestore();
+
+        await firebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then((u) => {
+                this.addUserToDatabase(u.user.uid);
+            })
+            .catch((err) => {
+                this.setState({errors: err.message});
+            });
     }
 
 
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.addUserToDatabase();
+        if(this.state.password !== this.state.confirmPassword) {
+            this.setState({errors: "Passwords do not match."})
+        } else {
+            this.addUserToAuth();
+        }
     };
 
 
@@ -107,6 +115,7 @@ class Signup extends Component {
                             value={this.state.firstName}
                             onChange={this.handleChange}
                             fullWidth
+                            required
                         />
 
                         <TextField
@@ -118,6 +127,7 @@ class Signup extends Component {
                             value={this.state.lastName}
                             onChange={this.handleChange}
                             fullWidth
+                            required
                         />
 
                         <TextField
@@ -166,6 +176,7 @@ class Signup extends Component {
                         </Button>
 
                         <br />
+                        <Typography variant="body1" color="error">{this.state.errors}</Typography>
                         <small>
                             Already have an account? <Link to="/login">Login here</Link>
                         </small>

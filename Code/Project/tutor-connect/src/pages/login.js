@@ -76,46 +76,47 @@ class Login extends Component {
             <Grid container>
                 <Grid item sm></Grid>
                 <Grid item sm>
-                <Typography variant="h2" className={classes.pageTitle}>
-                    Login
-                </Typography>
-                <form noValidate onSubmit={this.handleSubmit}>
-                    <TextField
-                        id="email"
-                        name="email"
-                        type="email"
-                        label="Email"
-                        className={classes.textField}
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                        fullWidth
-                    />
+                    <Typography variant="h2" className={classes.pageTitle}>
+                        Login
+                    </Typography>
+                    <form noValidate onSubmit={this.handleSubmit}>
+                        <TextField
+                            id="email"
+                            name="email"
+                            type="email"
+                            label="Email"
+                            className={classes.textField}
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                            fullWidth
+                        />
 
-                    <TextField
-                        id="password"
-                        name="password"
-                        type="password"
-                        label="Password"
-                        className={classes.textField}
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        fullWidth
-                    />
-                    
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                    >
-                    Login
-                    </Button>
-                <br />
-            <Typography variant="body1" color="error">{this.state.errors}</Typography>
-            <small>
-              dont have an account ? sign up <Link to="/signup">here</Link>
-            </small>
-        </form>
+                        <TextField
+                            id="password"
+                            name="password"
+                            type="password"
+                            label="Password"
+                            className={classes.textField}
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            fullWidth
+                        />
+                        
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                        >
+                            Login
+                        </Button>
+
+                        <br />
+                        <Typography variant="body1" color="error">{this.state.errors}</Typography>
+                        <small>
+                          dont have an account ? sign up <Link to="/signup">here</Link>
+                        </small>
+                    </form>
                 </Grid>
                 <Grid item sm></Grid>  
             </Grid>
