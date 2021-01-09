@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import firebaseApp from '../firebase';
 
@@ -39,7 +39,7 @@ class Login extends Component {
     async login(email, password) {
         this.setState({errors: ''});
         await firebaseApp.auth().signInWithEmailAndPassword(email, password)
-            .then()
+            .then((u) => this.props.history.push("/"))
             .catch((err) => {
                 if (err.code === "auth/wrong-password") {
                     this.setState({errors: "Password is invalid."})
@@ -110,7 +110,7 @@ class Login extends Component {
                     >
                     Login
                     </Button>
-            <br />
+                <br />
             <Typography variant="body1" color="error">{this.state.errors}</Typography>
             <small>
               dont have an account ? sign up <Link to="/signup">here</Link>
@@ -123,4 +123,4 @@ class Login extends Component {
     }
 }
 
-export default withStyles(styles)(Login)
+export default withRouter(withStyles(styles)(Login))

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import firebaseApp from '../firebase';
@@ -40,7 +40,7 @@ class Signup extends Component {
     }
 
 
-
+    //Add user document to Firestore
     async addUserToDatabase() {
         const db = firebaseApp.firestore();
 
@@ -65,20 +65,26 @@ class Signup extends Component {
             phone: ""
         };
 
-        await db.collection("users").doc(this.state.userID).set(userData);
+        await db.collection("users").doc(this.state.userID).set(userData)
+            .then((u) => this.props.history.push("/"));
 
     }
+
+
 
     handleSubmit = (event) => {
         event.preventDefault();
         this.addUserToDatabase();
     };
 
+
+
     handleChange = (event) => {
         this.setState({
           [event.target.name]: event.target.value
         });
     };
+
 
 
     render() {
@@ -88,79 +94,82 @@ class Signup extends Component {
             <Grid container>
                 <Grid item sm></Grid>
                 <Grid item sm>
-                <Typography variant="h2" className={classes.pageTitle}>
-                    Sign Up
-                </Typography>
-                <form noValidate onSubmit={this.handleSubmit}>
-                     <TextField
-                        id="firstName"
-                        name="firstName"
-                        type="text"
-                        label="First Name"
-                        className={classes.textField}
-                        value={this.state.firstName}
-                        onChange={this.handleChange}
-                        fullWidth
-                    />
-                     <TextField
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        label="Last Name"
-                        className={classes.textField}
-                        value={this.state.lastName}
-                        onChange={this.handleChange}
-                        fullWidth
-                    />
-                    <TextField
-                        id="email"
-                        name="email"
-                        type="email"
-                        label="Email"
-                        className={classes.textField}
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                        fullWidth
-                        required
-                    />
+                    <Typography variant="h2" className={classes.pageTitle}>
+                        Sign Up
+                    </Typography>
+                    <form noValidate onSubmit={this.handleSubmit}>
+                        <TextField
+                            id="firstName"
+                            name="firstName"
+                            type="text"
+                            label="First Name"
+                            className={classes.textField}
+                            value={this.state.firstName}
+                            onChange={this.handleChange}
+                            fullWidth
+                        />
 
-                    <TextField
-                        id="password"
-                        name="password"
-                        type="password"
-                        label="Password"
-                        className={classes.textField}
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        fullWidth
-                        required
-                    />
+                        <TextField
+                            id="lastName"
+                            name="lastName"
+                            type="text"
+                            label="Last Name"
+                            className={classes.textField}
+                            value={this.state.lastName}
+                            onChange={this.handleChange}
+                            fullWidth
+                        />
 
-                    <TextField
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        type="password"
-                        label="Confirm Password"
-                        className={classes.textField}
-                        value={this.state.confirmPassword}
-                        onChange={this.handleChange}
-                        fullWidth
-                        required
-                    />
+                        <TextField
+                            id="email"
+                            name="email"
+                            type="email"
+                            label="Email"
+                            className={classes.textField}
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                            fullWidth
+                            required
+                        />
+
+                        <TextField
+                            id="password"
+                            name="password"
+                            type="password"
+                            label="Password"
+                            className={classes.textField}
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            fullWidth
+                            required
+                        />
+
+                        <TextField
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            type="password"
+                            label="Confirm Password"
+                            className={classes.textField}
+                            value={this.state.confirmPassword}
+                            onChange={this.handleChange}
+                            fullWidth
+                            required
+                        />
                     
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                    >
-                    Sign Up
-                    </Button>
-            <br />
-            <small>
-              Already have an account? <Link to="/login">Login here</Link>
-            </small>
-        </form>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                        >
+                            Sign Up
+                        </Button>
+
+                        <br />
+                        <small>
+                            Already have an account? <Link to="/login">Login here</Link>
+                        </small>
+                    </form>
                 </Grid>
                 <Grid item sm></Grid>  
             </Grid>
@@ -168,4 +177,4 @@ class Signup extends Component {
     }
 }
 
-export default withStyles(styles)(Signup)
+export default withRouter(withStyles(styles)(Signup))

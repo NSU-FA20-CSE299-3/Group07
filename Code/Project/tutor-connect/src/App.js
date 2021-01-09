@@ -35,7 +35,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      user: {}
+      user: {},
+      loggedIn: false
     }
   }
 
@@ -46,11 +47,15 @@ class App extends Component {
   authListener() {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if(user) {
-        this.setState({user})
+        this.setState({user});
+        this.setState({loggedIn: true});
       }
       else {
-        this.setState({user: null})
+        this.setState({user: null});
+        this.setState({loggedIn: false});
       }
+
+      console.log(this.state);
     });
   }
 
@@ -64,8 +69,8 @@ class App extends Component {
           <div className="container">
             <Switch>
               <Route path="/" exact component={Home}/>
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup}/>
+              <Route path="/login" render={() => (this.state.loggedIn ? (<Redirect to="/" exact/>) : (<Login />))} />
+              <Route path="/signup" render={() => (this.state.loggedIn ? (<Redirect to="/" exact/>) : (<Signup />))} />
               <Route path="/user/:userID" component={User}/>
             </Switch>
           </div>
