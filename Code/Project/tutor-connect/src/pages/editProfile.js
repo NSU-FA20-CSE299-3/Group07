@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import firebaseApp from '../firebase';
 
 //Material UI Components
@@ -9,6 +10,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+const db = firebaseApp.firestore();
 
 const styles = {
     textField: {
@@ -39,8 +42,8 @@ class EditProfile extends Component {
 	}
 
 
+	//Fetch user info from Cloud Firestore
 	async getUserInfo() {
-		const db = firebaseApp.firestore();
 		await db.collection("users").doc(this.state.userID).get()
 			.then((u) =>{
 				const data = u.data();
@@ -67,11 +70,31 @@ class EditProfile extends Component {
 
 
 
+	//Update user document in Cloud Firestore
+	async updateUserInfo() {
+		await db.collection("users").doc(this.state.userID).set(this.state)
+			.then((u) => this.props.history.push("/user/" + this.state.userID))
+			.catch((err) => {
+				console.log(err);
+			});
+	}
+
+
+
+	handleSubmit = (event) => {
+        event.preventDefault();
+        this.updateUserInfo();
+    }
+
+
+
 	handleChange = (event) => {
         this.setState({
           [event.target.name]: event.target.value
         });
     };
+
+
 
 	render() {
 		const { classes } = this.props;
@@ -161,4 +184,4 @@ class EditProfile extends Component {
 }
 
 
-export default withStyles(styles)(EditProfile)
+export default withRouter(withStyles(styles)(EditProfile))
