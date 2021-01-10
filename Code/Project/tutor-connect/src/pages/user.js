@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import firebaseApp from '../firebase';
 import OfferPost from '../components/OfferPost';
 
@@ -16,6 +17,7 @@ class User extends Component {
 		super(props);
 
 		this.state = {
+			user: {},
 			userID: this.props.match.params.userID,
 			userInfo: {},
 			offers: []
@@ -24,7 +26,20 @@ class User extends Component {
 
 	componentDidMount() {
 		this.getUserInfo();
+		this.authListener();
 	}
+
+
+	authListener() {
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.setState({user})
+      }
+      else {
+        this.setState({user: null})
+      }
+    });
+  }
 
 
 
@@ -77,6 +92,11 @@ class User extends Component {
                             </Typography>
                         </CardContent>
                     </Card>
+
+                    {(this.state.user && (this.state.user.uid === this.state.userID)) ? 
+                    	(<Link to="/edit-profile" underline="hover" color="primary">Edit Profile</Link>) : null}
+
+                    <Typography></Typography>
 				</Grid>
 				<Grid item sm={1} xs={12}></Grid>
 				<Grid item sm={5} xs={12}>

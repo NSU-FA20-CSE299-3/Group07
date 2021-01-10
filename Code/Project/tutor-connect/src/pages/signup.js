@@ -39,7 +39,7 @@ class Signup extends Component {
     }
 
 
-    //Add user to Firebase Authentication
+    //Add user document to Cloud Firestore
     async addUserToDatabase(userID) {
         const db = firebaseApp.firestore();
 
@@ -61,10 +61,8 @@ class Signup extends Component {
 
 
 
-    //Add user document to Cloud Firestore
+    //Add user to Firebase Authentication
     async addUserToAuth() {
-        const db = firebaseApp.firestore();
-
         await firebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((u) => {
                 this.addUserToDatabase(u.user.uid);

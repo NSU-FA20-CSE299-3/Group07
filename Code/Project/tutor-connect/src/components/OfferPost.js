@@ -8,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-
 class OfferPost extends Component {
 
     constructor(props) {
@@ -47,7 +46,7 @@ class OfferPost extends Component {
         return (
             <Card className="card">
                 <CardContent>
-                    <Typography variant="h5" component={Link} to={`/user/${userID}` } color="primary">
+                    <Typography variant="h5" component={Link} to={`/user/${userID}`} color="primary">
                         {displayName}
                     </Typography>
                     <br />

@@ -13,6 +13,7 @@ import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
 import User from './pages/user';
+import EditProfile from './pages/editProfile';
 
 const theme = createMuiTheme({
   palette: {
@@ -54,8 +55,6 @@ class App extends Component {
         this.setState({user: null});
         this.setState({loggedIn: false});
       }
-
-      console.log(this.state);
     });
   }
 
@@ -72,6 +71,7 @@ class App extends Component {
               <Route path="/login" render={() => (this.state.loggedIn ? (<Redirect to="/" exact/>) : (<Login />))} />
               <Route path="/signup" render={() => (this.state.loggedIn ? (<Redirect to="/" exact/>) : (<Signup />))} />
               <Route path="/user/:userID" component={User}/>
+              <Route path="/edit-profile" render={() => (this.state.loggedIn ? (<EditProfile />) : (<Redirect to="/" exact/>))} />
             </Switch>
           </div>
         </Router>
