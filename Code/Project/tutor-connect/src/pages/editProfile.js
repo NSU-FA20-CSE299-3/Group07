@@ -10,6 +10,16 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+const styles = {
+    textField: {
+        marginTop: '30px'
+    },
+    button: {
+        margin: '20px 0 20px auto'
+    }
+}
+
+
 
 class EditProfile extends Component {
 
@@ -64,6 +74,8 @@ class EditProfile extends Component {
     };
 
 	render() {
+		const { classes } = this.props;
+
 		return (
 			<Grid container>
 				<Grid item sm={2}></Grid>
@@ -71,16 +83,25 @@ class EditProfile extends Component {
 					<h1>Edit Profile</h1>
 					<Card>
 						<CardContent>
+							<Typography variant="body1">
+								First name: {this.state.firstName}
+							</Typography>
+							<Typography variant="body1" className={classes.textField}>
+								Last name: {this.state.lastName}
+							</Typography>
+							<Typography variant="body1" className={classes.textField}>
+								Email: {this.state.email}
+							</Typography>
 							<form noValidate onSubmit={this.handleSubmit}>
                                 <TextField
                                     id="phone"
                                     name="phone"
                                     type="text"
                                     label="Phone Number"
+                                    className={classes.textField}
                                     variant="outlined"
                                     value={this.state.phone}
                                     onChange={this.handleChange}
-                                    fullWidth
                                 />
 
                                 <TextField
@@ -88,9 +109,11 @@ class EditProfile extends Component {
                                     name="bio"
                                     type="text"
                                     label="Bio"
+                                    className={classes.textField}
                                     variant="outlined"
                                     value={this.state.bio}
                                     onChange={this.handleChange}
+                                    multiline="true"
                                     fullWidth
                                 />
 
@@ -99,21 +122,22 @@ class EditProfile extends Component {
                                     name="education"
                                     type="text"
                                     label="Education"
+                                    className={classes.textField}
                                     variant="outlined"
                                     value={this.state.education}
                                     onChange={this.handleChange}
-                                    fullWidth
                                 />
+                                <br />
 
                                 <TextField
                                     id="location"
                                     name="location"
                                     type="text"
                                     label="Location"
+                                    className={classes.textField}
                                     variant="outlined"
                                     value={this.state.location}
                                     onChange={this.handleChange}
-                                    fullWidth
                                 />
 
                                 <br />
@@ -122,6 +146,7 @@ class EditProfile extends Component {
                                     type="submit"
                                     variant="contained"
                                     color="primary"
+                                    className={classes.button}
                                 >
                                     Update Profile
                                 </Button>
@@ -136,4 +161,4 @@ class EditProfile extends Component {
 }
 
 
-export default EditProfile
+export default withStyles(styles)(EditProfile)
