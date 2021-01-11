@@ -7,6 +7,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 class OfferPost extends Component {
 
@@ -14,17 +19,43 @@ class OfferPost extends Component {
         super(props);
 
         this.state = {
-            buttonDisable: false
+            currentUserDisplayName: "",
+            buttonDisable: false,
+            answers: []
+        }
+    }
+
+    componentDidMount() {
+        this.showAnswers(this.props.offer.offerID);
+        this.getCurrentUserInfo();
+    }
+
+    async getCurrentUserInfo() {
+        const db = firebaseApp.firestore();
+
+        if(this.props.currentUser){
+            await db.collection("users").doc(this.props.currentUser.uid).get()
+            .then((user) => {
+                const userData = user.data();
+                const firstName = userData.firstName;
+                const lastName = userData.lastName;
+                const displayName = firstName.concat(" ", lastName)
+                this.setState({currentUserDisplayName: displayName});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
         }
     }
 
     //Add answers to database
-    async applyAnswer(offerID, userID, displayName) {
+    async applyAnswer() {
         const newAnswer = {
             offerID: this.props.offer.offerID,
             userID: this.props.offer.userID,
             answerUserID: this.props.currentUser.uid,
-            displayName: displayName
+            displayName: this.state.currentUserDisplayName
         };
 
         const db = firebaseApp.firestore();
@@ -55,8 +86,9 @@ class OfferPost extends Component {
                     };
 
                     return answerInfo;
-                })
+                });
 
+                this.setState({answers: answerset});
                 console.log(answerset);
             })
             .catch((err) => console.log(err));
@@ -66,6 +98,18 @@ class OfferPost extends Component {
 
     render() {
         const {offer : {offerID, userID, displayName, schoolMedium, schoolClass, description, location, salary, duration, answerCount}} = this.props;
+
+        const answersList = this.state.answers.map((answer) => {
+            if (answer) {
+                return (
+                    <ListItem>
+                        <Link to={`/user/${answer.userID}`}>{answer.displayName}</Link>
+                    </ListItem>
+                )
+            } else {return null}
+        });
+
+
         return (
             <Card className="card">
                 <CardContent>
@@ -90,12 +134,28 @@ class OfferPost extends Component {
 
                     {(this.props.currentUser && (this.props.currentUser.uid !== userID)) ?
                         (<Button
-                            onClick={() => this.applyAnswer(offerID, userID, displayName)}
+                            onClick={() => this.applyAnswer()}
                             variant="contained"
                             color="primary"
                             disabled={this.state.buttonDisable}
-                        > Apply </Button>) :
-                        (<Button onClick={() => this.showAnswers(offerID)}>Show answers</Button>)}
+                        > Apply </Button>) : 
+                        null
+                        
+                    }
+
+
+
+                    {(this.props.currentUser && (this.props.currentUser.uid === userID)) ?
+                        (<Accordion>
+                            <AccordionSummary>Answers</AccordionSummary>
+                            <AccordionDetails>
+                                <List>
+                                    {answersList}
+                                </List>
+                            </AccordionDetails>
+                        </Accordion>) :
+                        null
+                    }
                     
                 </CardContent>
             </Card>
