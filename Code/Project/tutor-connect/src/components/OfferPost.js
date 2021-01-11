@@ -23,12 +23,13 @@ class OfferPost extends Component {
         const newAnswer = {
             offerID: this.props.offer.offerID,
             userID: this.props.offer.userID,
-            answerUserID: this.props.currentUser.uid
+            answerUserID: this.props.currentUser.uid,
+            displayName: displayName
         };
 
         const db = firebaseApp.firestore();
 
-        await db.collection("answers").add(newAnswer)
+        await db.collection("offers").doc(newAnswer.offerID).collection("answers").add(newAnswer)
             .then((snapshot) => console.log("Answer made with ID: " + snapshot.id));
 
         this.setState({buttonDisable: true});
@@ -39,6 +40,28 @@ class OfferPost extends Component {
             .update({answerCount: newAnswerCount})
             .catch((err) => {console.log(err)});
     }
+
+
+    async showAnswers(offerID) {
+        const db = firebaseApp.firestore();
+
+        await db.collection("offers").doc(offerID).collection("answers").get()
+            .then((querySnapshot) => {
+                const answerset = querySnapshot.docs.map((doc) => {
+                    const data = doc.data();
+                    const answerInfo = {
+                        userID: data.answerUserID,
+                        displayName: data.displayName
+                    };
+
+                    return answerInfo;
+                })
+
+                console.log(answerset);
+            })
+            .catch((err) => console.log(err));
+    }
+    
 
 
     render() {
@@ -72,7 +95,7 @@ class OfferPost extends Component {
                             color="primary"
                             disabled={this.state.buttonDisable}
                         > Apply </Button>) :
-                        (<Typography variant="body2" component="p"> </Typography>)}
+                        (<Button onClick={() => this.showAnswers(offerID)}>Show answers</Button>)}
                     
                 </CardContent>
             </Card>
