@@ -12,25 +12,36 @@ class Home extends Component {
         super(props);
         this.state = {
             offers: [],
-            user: {}
+            user: {},
+            mounted: false
         }
+
+        let mounted = false;
     }
 
 
-    componentDidMount(){
-    this.authListener();
-  }
+    componentDidMount() {
+        this.authListener();
+        this.mounted = true;
+        console.log("Mounted state: " + this.mounted);
+    }
 
-  authListener() {
-    firebaseApp.auth().onAuthStateChanged((user) => {
-      if(user) {
-        this.setState({user})
-      }
-      else {
-        this.setState({user: null})
-      }
-    });
-  }
+    componentWillUnmount() {
+        this.mounted = false;
+        console.log("Mounted state: " + this.mounted);
+    }
+
+
+    authListener() {
+        firebaseApp.auth().onAuthStateChanged((user) => {
+            if(user) {
+                this.setState({user})
+            }
+            else {
+                this.setState({user: null})
+            }
+        });
+    }
 
 
     //Fetch recent offers from Firestore
@@ -43,15 +54,19 @@ class Home extends Component {
                     data.offerID = doc.id;
                     return data;
                 });
-                this.setState({offers: offersSet});
+                if(this.mounted) {
+                    this.setState({offers: offersSet});
+                }
             })
             .catch((err) => {console.log(err)});
     }
+
 
     render() {
         this.getRecentOffers();
         let recentOffers = this.state.offers.map((offer) => {if (offer) { 
                 return (<OfferPost key={offer.offerID} offer={offer} currentUser={this.state.user} />);}
+                else {return null}
             });
 
         return (
