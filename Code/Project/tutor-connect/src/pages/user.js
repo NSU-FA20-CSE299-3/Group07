@@ -22,11 +22,19 @@ class User extends Component {
 			userInfo: {},
 			offers: []
 		}
+
+		let mounted;
 	}
 
 	componentDidMount() {
+		this.mounted = true;
 		this.getUserInfo();
 		this.authListener();
+	}
+
+
+	componentWillUnmount() {
+		this.mounted = false;
 	}
 
 
@@ -59,7 +67,10 @@ class User extends Component {
                     data.offerID = doc.id;
                     return data;
                 });
-                this.setState({offers: offersSet});
+
+                if (this.mounted) {
+                	this.setState({offers: offersSet});
+            	}
 			})
 			.catch(err => console.log(err));
 
@@ -68,7 +79,10 @@ class User extends Component {
 	render() {
 		this.getUserOffers();
         let userOffers = this.state.offers.map((offer) => {if (offer) { 
-                return (<OfferPost key={offer.offerID} offer={offer} currentUser={this.state.user} />);}
+                return (
+                	<OfferPost key={offer.offerID} offer={offer} currentUser={this.state.user} />
+                );}
+                else {return null}
             });
 
 		return (

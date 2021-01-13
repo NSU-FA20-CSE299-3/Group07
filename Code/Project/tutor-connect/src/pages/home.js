@@ -16,19 +16,17 @@ class Home extends Component {
             mounted: false
         }
 
-        let mounted = false;
+        let mounted;
     }
 
 
     componentDidMount() {
         this.authListener();
         this.mounted = true;
-        console.log("Mounted state: " + this.mounted);
     }
 
     componentWillUnmount() {
         this.mounted = false;
-        console.log("Mounted state: " + this.mounted);
     }
 
 
