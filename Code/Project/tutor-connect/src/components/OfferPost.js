@@ -21,7 +21,7 @@ class OfferPost extends Component {
         this.state = {
             currentUserDisplayName: "",
             buttonDisable: false,
-            answers: []
+            answers: [],
         }
     }
 
@@ -89,7 +89,6 @@ class OfferPost extends Component {
                 });
 
                 this.setState({answers: answerset});
-                console.log(answerset);
             })
             .catch((err) => console.log(err));
     }
@@ -97,7 +96,7 @@ class OfferPost extends Component {
 
 
     render() {
-        const {offer : {offerID, userID, displayName, schoolMedium, schoolClass, description, location, salary, duration, answerCount}} = this.props;
+        const {offer : { userID, displayName, schoolMedium, schoolClass, description, location, salary, duration, answerCount}} = this.props;
 
         const answersList = this.state.answers.map((answer) => {
             if (answer) {
@@ -145,8 +144,8 @@ class OfferPost extends Component {
 
 
 
-                    {(this.props.currentUser && (this.props.currentUser.uid === userID)) ?
-                        (<Accordion>
+                    {(this.props.currentUser && (this.props.currentUser.uid === userID) && answerCount) ?
+                        (<Accordion elevation={0}>
                             <AccordionSummary>Answers</AccordionSummary>
                             <AccordionDetails>
                                 <List>

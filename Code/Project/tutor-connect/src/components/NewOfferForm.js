@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebaseApp from '../firebase';
 
-
+//Material UI Components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const styles = {
@@ -35,7 +36,8 @@ class NewOfferForm extends Component {
             description: '',
             location: '',
             salary: 0,
-            duration: 0
+            duration: 0,
+            loading: false
         }   
     }
 
@@ -51,7 +53,9 @@ class NewOfferForm extends Component {
     }
 
 
+    //Add new post document to Cloud Firestore
     async postNewOffer() {
+        this.setState({loading: true});
         const postData = {
             userID: this.props.currentUserID,
             displayName: this.state.displayName,
@@ -73,7 +77,8 @@ class NewOfferForm extends Component {
                     description: '',
                     location: '',
                     salary: 0,
-                    duration: 0
+                    duration: 0,
+                    loading: false
                 });
             })
             .catch((err) => {console.log(err)});
@@ -118,6 +123,7 @@ class NewOfferForm extends Component {
                                     value={this.state.schoolMedium}
                                     onChange={this.handleChange}
                                     fullWidth
+                                    required
                                 />
 
                                 <TextField
@@ -130,6 +136,7 @@ class NewOfferForm extends Component {
                                     value={this.state.schoolClass}
                                     onChange={this.handleChange}
                                     fullWidth
+                                    required
                                 />
 
                                 <TextField
@@ -142,6 +149,7 @@ class NewOfferForm extends Component {
                                     value={this.state.description}
                                     onChange={this.handleChange}
                                     fullWidth
+                                    required
                                 />
 
                                 <TextField
@@ -154,6 +162,7 @@ class NewOfferForm extends Component {
                                     value={this.state.location}
                                     onChange={this.handleChange}
                                     fullWidth
+                                    required
                                 />
 
                                 <TextField
@@ -185,14 +194,16 @@ class NewOfferForm extends Component {
                                 />
                                 <br />
 
-                                <Button
+                                {this.state.loading ? (<CircularProgress color="primary" className={classes.button}/>) :
+                                    (<Button
                                     type="submit"
                                     variant="contained"
                                     color="primary"
                                     className={classes.button}
-                                >
-                                    Post
-                                </Button>
+                                    >
+                                        Post
+                                    </Button>)
+                                }
                             </form>
                         </CardContent>
                     </Card>
