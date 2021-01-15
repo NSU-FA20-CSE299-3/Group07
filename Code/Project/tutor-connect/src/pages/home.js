@@ -70,7 +70,7 @@ class Home extends Component {
         return (
             <Grid container>
                 <Grid item sm={6} xs={12}>
-                    <h1>Home Page</h1>
+                    <h1>Recent Offers</h1>
                     <div>{recentOffers}</div>
                 </Grid>
                 <Grid item sm={6} xs={12}>
