@@ -1,17 +1,29 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import firebaseApp from '../firebase';
 
 //Material UI Components
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+
+const styles = {
+    displayName: {
+        marginLeft: "10px",
+        marginTop: "5px"
+    }
+}
 
 class OfferPost extends Component {
 
@@ -96,13 +108,17 @@ class OfferPost extends Component {
 
 
     render() {
+        const { classes } = this.props;
         const {offer : { userID, displayName, schoolMedium, schoolClass, description, location, salary, duration, answerCount}} = this.props;
 
         const answersList = this.state.answers.map((answer) => {
             if (answer) {
                 return (
                     <ListItem>
-                        <Link to={`/user/${answer.userID}`}>{answer.displayName}</Link>
+                        <ListItemAvatar>
+                            <Avatar>{answer.displayName ? (answer.displayName.charAt(0)) : "..."}</Avatar>
+                        </ListItemAvatar>
+                        <Link href={`/user/${answer.userID}`} underline="none">{answer.displayName}</Link>
                     </ListItem>
                 )
             } else {return null}
@@ -112,9 +128,17 @@ class OfferPost extends Component {
         return (
             <Card className="card">
                 <CardContent>
-                    <Typography variant="h5" component={Link} to={`/user/${userID}`} color="primary">
-                        {displayName}
-                    </Typography>
+                    <Grid container direction="row">
+                        <Grid item wrap="nowrap">
+                            <Avatar>{displayName.charAt(0)}</Avatar>
+                        </Grid>
+                        <Grid item wrap="nowrap">
+                            <Typography variant="h5" color="primary" display="block" className={classes.displayName}>
+                                <Link href={`/user/${userID}`} underline="none">{displayName}</Link>
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    
                     <br />
                     <Typography variant="body2" component="p">
                         Medium/Version: {schoolMedium}
@@ -162,4 +186,4 @@ class OfferPost extends Component {
     }
 }
 
-export default OfferPost
+export default withStyles(styles)(OfferPost)
