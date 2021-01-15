@@ -9,17 +9,25 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-const styles = {
+const styles = (theme: Theme) => ({
     textField: {
         marginTop: '20px'
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 150,
     },
     button: {
         margin: '20px 0 20px auto'
     }
-}
+});
 
 const db = firebaseApp.firestore();
 
@@ -113,27 +121,36 @@ class NewOfferForm extends Component {
                         <CardContent >
                             <Typography variant="h6">Make a New Offer</Typography>
                             <form noValidate onSubmit={this.handleSubmit}>
+                                <FormControl className={classes.formControl} >
+                                    <InputLabel id="school-class-label">Class</InputLabel>
+                                    <Select
+                                        name="schoolClass"
+                                        labelId="school-class-label"
+                                        id="schoolClass"
+                                        value={this.state.schoolClass}
+                                        onChange={this.handleChange}
+                                    >
+                                        <MenuItem value={"I"}>I</MenuItem>
+                                        <MenuItem value={"II"}>II</MenuItem>
+                                        <MenuItem value={"III"}>III</MenuItem>
+                                        <MenuItem value={"IV"}>III</MenuItem>
+                                        <MenuItem value={"V"}>V</MenuItem>
+                                        <MenuItem value={"VI"}>VI</MenuItem>
+                                        <MenuItem value={"VII"}>VII</MenuItem>
+                                        <MenuItem value={"VIII"}>VIII</MenuItem>
+                                        <MenuItem value={"IX"}>IX</MenuItem>
+                                        <MenuItem value={"X"}>X</MenuItem>
+                                    </Select>
+                                </FormControl>
+
                                 <TextField
                                     id="schoolMedium"
                                     name="schoolMedium"
                                     type="text"
                                     className={classes.textField}
-                                    label="Medium"
+                                    label="Medium/Version"
                                     variant="outlined"
                                     value={this.state.schoolMedium}
-                                    onChange={this.handleChange}
-                                    fullWidth
-                                    required
-                                />
-
-                                <TextField
-                                    id="schoolClass"
-                                    name="schoolClass"
-                                    type="text"
-                                    className={classes.textField}
-                                    label="Class"
-                                    variant="outlined"
-                                    value={this.state.schoolClass}
                                     onChange={this.handleChange}
                                     fullWidth
                                     required
