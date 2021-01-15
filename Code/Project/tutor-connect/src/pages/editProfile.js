@@ -136,7 +136,7 @@ class EditProfile extends Component {
                                     variant="outlined"
                                     value={this.state.bio}
                                     onChange={this.handleChange}
-                                    multiline="true"
+                                    multiline={true}
                                     fullWidth
                                 />
 

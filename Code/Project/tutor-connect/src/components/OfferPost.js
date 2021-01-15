@@ -94,7 +94,8 @@ class OfferPost extends Component {
                     const data = doc.data();
                     const answerInfo = {
                         userID: data.answerUserID,
-                        displayName: data.displayName
+                        displayName: data.displayName,
+                        answerID: doc.id
                     };
 
                     return answerInfo;
@@ -114,7 +115,7 @@ class OfferPost extends Component {
         const answersList = this.state.answers.map((answer) => {
             if (answer) {
                 return (
-                    <ListItem>
+                    <ListItem key={answer.answerID}>
                         <ListItemAvatar>
                             <Avatar>{answer.displayName ? (answer.displayName.charAt(0)) : "..."}</Avatar>
                         </ListItemAvatar>
@@ -129,10 +130,10 @@ class OfferPost extends Component {
             <Card className="card">
                 <CardContent>
                     <Grid container direction="row">
-                        <Grid item wrap="nowrap">
+                        <Grid item>
                             <Avatar>{displayName.charAt(0)}</Avatar>
                         </Grid>
-                        <Grid item wrap="nowrap">
+                        <Grid item>
                             <Typography variant="h5" color="primary" display="block" className={classes.displayName}>
                                 <Link href={`/user/${userID}`} underline="none">{displayName}</Link>
                             </Typography>

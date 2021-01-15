@@ -71,7 +71,7 @@ class App extends Component {
               <Route path="/login" render={() => (this.state.loggedIn ? (<Redirect to="/" exact/>) : (<Login />))} />
               <Route path="/signup" render={() => (this.state.loggedIn ? (<Redirect to="/" exact/>) : (<Signup />))} />
               <Route path="/user/:userID" component={User}/>
-              <Route path="/edit-profile" render={() => (this.state.loggedIn ? (<EditProfile currentUserID={this.state.user.uid} />) : (<Redirect to="/" exact/>))} />
+              <Route path="/edit-profile" render={() => (this.state.user ? (<EditProfile currentUserID={this.state.user.uid} />) : (<Redirect to="/" exact/>))} />
             </Switch>
           </div>
         </Router>

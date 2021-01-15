@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import firebaseApp from '../firebase';
 import OfferPost from '../components/OfferPost';
+import { Link } from 'react-router-dom';
 
 //Material UI Components
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar'
+import withStyles from '@material-ui/styles/withStyles';
 
 const db = firebaseApp.firestore();
+
+const styles = {
+	userInfo: {
+		marginTop: "20px",
+		marginLeft: "10px"
+	},
+	button: {
+		margin: "20px"
+	},
+	avatar: {
+		width: "75px",
+		height: "75px",
+		margin: "auto"
+	}
+}
 
 class User extends Component {
 
@@ -30,6 +48,7 @@ class User extends Component {
 		this.mounted = true;
 		this.getUserInfo();
 		this.authListener();
+		this.getUserOffers();
 	}
 
 
@@ -77,7 +96,9 @@ class User extends Component {
 	}
 
 	render() {
-		this.getUserOffers();
+
+		const { classes } = this.props;
+
         let userOffers = this.state.offers.map((offer) => {if (offer) { 
                 return (
                 	<OfferPost key={offer.offerID} offer={offer} currentUser={this.state.user} />
@@ -91,26 +112,41 @@ class User extends Component {
 					<h1>User Info</h1>
 					<Card className="card">
                         <CardContent>
-                            <Typography variant="h5" component="h2" color="primary">
-                                This is user: {this.state.userInfo.firstName} {this.state.userInfo.lastName}
+                        	<Grid container>
+	                        	<Grid item sm></Grid>
+	                        	<Grid item sm>
+	                        		<Avatar className={classes.avatar}>
+                        				{this.state.userInfo.firstName ? this.state.userInfo.firstName.charAt(0) : "..."}
+                        			</Avatar>
+	                        	</Grid>
+	                        	<Grid item sm></Grid>
+                        	</Grid>
+                        	<Typography variant="h4" component="h2" color="primary" align="center">
+                                {this.state.userInfo.firstName} {this.state.userInfo.lastName}
                             </Typography>
                             <br />
-                            <Typography variant="body2" component="p">
+                            <Typography variant="body1" component="p" className={classes.userInfo}>
                                 Bio: {this.state.userInfo.bio}
-                                <br />
+                            </Typography>
+                            <Typography variant="body1" component="p" className={classes.userInfo}>
                                 Education: {this.state.userInfo.education}
-                                <br />
+                            </Typography>
+                            <Typography variant="body1" component="p" className={classes.userInfo}>
                                 Email: {this.state.userInfo.email}
-                                <br />
+                            </Typography>
+                            <Typography variant="body1" component="p" className={classes.userInfo}>
                                 Phone: {this.state.userInfo.phone}
                             </Typography>
                         </CardContent>
                     </Card>
 
                     {(this.state.user && (this.state.user.uid === this.state.userID)) ? 
-                    	(<Link to="/edit-profile" underline="hover" color="primary">Edit Profile</Link>) : null}
+                    	(<Button color="primary" 
+                    		component={Link} 
+                    		to="/edit-profile" 
+                    		className={classes.button}
+                    		>Edit Profile</Button>) : null}
 
-                    <Typography></Typography>
 				</Grid>
 				<Grid item sm={1} xs={12}></Grid>
 				<Grid item sm={5} xs={12}>
@@ -122,4 +158,4 @@ class User extends Component {
 	}
 }
 
-export default User;
+export default withStyles(styles)(User);
