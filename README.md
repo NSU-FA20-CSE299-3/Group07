@@ -1,18 +1,20 @@
-<p style="text-align: center;">&nbsp;</p>
-<p style="text-align: center;">&nbsp;</p>
-<p align="center"><strong><img src="https://media.dhakatribune.com/uploads/2016/11/nsulogo.jpg" alt="" width="307" height="172" /></strong></p>
-<p align="center"><strong>North South University</strong></p>
-<p align="center">Department of Electrical &amp; Computer Engineering</p>
-<p align="center"><strong>Project Proposal</strong></p>
-<p align="center"><strong>Group No.:</strong> 7</p>
-<p align="center"><strong>Fall 2020</strong></p>
-<p align="center"><strong>Project Name:</strong> Tutor Connect</p>
-<p align="center"><strong>Course No.:</strong> CSE299 <strong>Sec:</strong> 3</p>
-<p align="center"><strong>Faculty:</strong> Shaikh Shawon Arefin Shimon (SAS3)</p>
-<p align="center"><strong>Name:</strong> Samiya Kazi</p>
-<p align="center"><strong>ID:</strong> 1711620642</p>
-<p align="center"><strong>Email:</strong> <a href="mailto:samiya.kazi@northsouth.edu"> samiya.kazi@northsouth.edu</a></p>
-<p align="center"><strong>Date Prepared</strong><strong>: </strong>13/11/2020</p>
+<p align="center">
+  <img width="250" height="280" src="documentation/images/nsu-logo.png">
+</p>                                        
+
+  <h1 align="center">Project Name: Tutor Connect</h1>
+  <h2 align ="center">Course Number: CSE 299<br>
+  Section: 3</br>
+  Semester: Fall 2020</br><br>
+  Faculty Name: Shaikh Shawon Arefin Shimon<br>
+  Group: 7<br>
+  Student Name: Samiya Kazi<br>
+  Student ID: 1711620642<br>
+  Email: <a href="mailto:samiya.kazi@northsouth.edu"> samiya.kazi@northsouth.edu</a> </h2>
+  <br><br>
+
+
+
 <p><strong>&nbsp;</strong></p>
 <p><strong>&nbsp;</strong></p>
 <p><strong>Introduction</strong></p>
