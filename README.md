@@ -31,7 +31,7 @@
 <p>Tutoring students is the most common job for students and young adults in Bangladesh. However, the process of finding tuition offers is difficult and can be troublesome for some. Along with that, finding a suitable tutor for your child takes time and background checks. Having a place where tuition offers and tutors are located together can make both of these jobs much easier.</p>
 <p>The goal of this project is to create a web app where tutors have access to available tuition offers and parents get access to a plethora of tutors and a means to contact them. Users will be able to see tuition offers and their information, like location and salary, upfront. They will also be able to see the background information of the tutors that want to offer their services.</p>
 
-<h2 id="features">1. Software Specification</h2>
+<h2 id="features">2. Software Specification</h2>
 <p>The features of this project are the following &ndash;
 <h3>2.1 User registration</h3>
 <p>
@@ -78,23 +78,25 @@
 </p>
 <br><br>
 <p align="center">
-   <img width="700" height="420" src="Documentation/images/answer.PNG"><br>
+   <img width="700" height="420" src="Documentation/images/answers.PNG"><br>
    Figure 4.1 &ndash; Answers open to view in user's own post
 </p>
 <br><br>
 
-
-<p><strong>Technology</strong></p>
+<h2 id="technology">3. Technology</h2>
+<h3>3.1 Proposed Technology Stack</h3>
 <p><em>Frontend:</em></p>
 <p>For the front-end I will use HTML, CSS, React, and Material-UI. The web app will be compatible with both PC and mobile browsers. Redux will help with managing component states while Material-UI will ensure compatibility between platforms.</P>
 <p><em>Backend:</em></p>
 <p>For the backend of the web application, I will be using Node.js to manage packages and scripts.</p>
 <p><em>Database:</em></p>
 <p>For the database aspect of the project I will use Firebase, more specifically Cloud Firestore. This will allow us to have a real-time NoSql database and provide login authentication.</p>
-<p>&nbsp;</p>
-<p><strong>Monetization</strong></p>
-<p>Tutors pay a membership fee when signing up of BDT 500. The payment will be taken through bKash. I will be using bKash as it is the most popular medium for online transactions.</p>
-<p>&nbsp;</p>
-<p><strong>Social Impact</strong></p>
-<p>This web application will aim to make finding suitable tutors for children easier. As many young adults and university students look towards tutoring jobs as a source of income, it can get hard to find many tutors that are appropriate for the offer. Alongside that, it can be difficult for a tutor to find available offerings just through word of mouth or social media. The application will aim in connecting these two parties to ensure the best experience for both.</p>
-<p>&nbsp;</p>
+
+<h3>3.2 Implemented Technology</h3>
+
+
+
+<h2 id="businessplan">4. Business Plan/Monetization</h2>
+<p>Tutors can pay a membership fee when signing up of BDT 500. The payment will be taken through bKash. I will be using bKash as it is the most popular medium for online transactions. If the application is approved for Google AdSense, Google ads will also be a way to monetize the application.</p>
+
+<h2 id="conclusion">5. Conclusion</h2>
