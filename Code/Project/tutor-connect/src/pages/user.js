@@ -137,6 +137,9 @@ class User extends Component {
                             <Typography variant="body1" component="p" className={classes.userInfo}>
                                 Phone: {this.state.userInfo.phone}
                             </Typography>
+                            <Typography variant="body1" component="p" className={classes.userInfo}>
+                                Location: {this.state.userInfo.location}
+                            </Typography>
                         </CardContent>
                     </Card>
 

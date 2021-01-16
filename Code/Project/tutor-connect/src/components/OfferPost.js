@@ -146,7 +146,9 @@ class OfferPost extends Component {
                         <br />
                         Class: {schoolClass}
                         <br />
-                        Subjects: {description}      Duration: {duration} days a week
+                        Subjects: {description}
+                        <br />
+                        Duration: {duration} days a week
                         <br />
                         Location: {location}
                         <br />
