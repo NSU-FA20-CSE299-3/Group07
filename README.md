@@ -39,7 +39,7 @@
 </p>
 <br><br>
 <p align="center">
-   <img width="700" height="420" src="Documentation/images/signup.png"><br>
+   <img width="700" height="420" src="Documentation/images/signup.PNG"><br>
    Figure 1.0 &ndash; Sign up page
 </p>
 <h3>2.2 User profiles</h3>
@@ -48,12 +48,12 @@
 </p>
 <br><br>
 <p align="center">
-   <img width="700" height="420" src="Documentation/images/profile.png"><br>
+   <img width="700" height="420" src="Documentation/images/profile.PNG"><br>
    Figure 2.0 &ndash; User profile
 </p>
 <br>
 <p align="center">
-   <img width="700" height="420" src="Documentation/images/editprofile.png"><br>
+   <img width="700" height="420" src="Documentation/images/editprofile.PNG"><br>
    Figure 2.1 &ndash; Edit profile form for logged in user
 </p>
 <br><br>
@@ -63,7 +63,7 @@
 </p>
 <br><br>
 <p align="center">
-   <img width="700" height="420" src="Documentation/images/postform.png"><br>
+   <img width="700" height="420" src="Documentation/images/postform.PNG"><br>
    Figure 3.0 &ndash; New offer form for logged in users
 </p>
 <br><br>
@@ -73,12 +73,12 @@
 </p>
 <br><br>
 <p align="center">
-   <img width="700" height="420" src="Documentation/images/apply.png"><br>
+   <img width="700" height="420" src="Documentation/images/apply.PNG"><br>
    Figure 4.0 &ndash; Apply option enabled for logged in user
 </p>
 <br><br>
 <p align="center">
-   <img width="700" height="420" src="Documentation/images/answer.png"><br>
+   <img width="700" height="420" src="Documentation/images/answer.PNG"><br>
    Figure 4.1 &ndash; Answers open to view in user's own post
 </p>
 <br><br>
