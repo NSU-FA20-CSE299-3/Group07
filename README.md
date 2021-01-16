@@ -29,7 +29,7 @@
 </ul>
 <p><strong>Technology</strong></p>
 <p><em>Frontend:</em></p>
-<p>For the front-end I will use HTML, CSS, React, Redux and Material-UI. The web app will be compatible with both PC and mobile browsers. Redux will help with managing component states while Material-UI will ensure compatibility between platforms.</P>
+<p>For the front-end I will use HTML, CSS, React, and Material-UI. The web app will be compatible with both PC and mobile browsers. Redux will help with managing component states while Material-UI will ensure compatibility between platforms.</P>
 <p><em>Backend:</em></p>
 <p>For the backend of the web application, I will be using Node.js to manage packages and scripts.</p>
 <p><em>Database:</em></p>
