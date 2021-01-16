@@ -24,14 +24,14 @@
   <a href="#businessplan"><li>Business Plan/Monetization</li></a><br>
   <a href="#conclusion"><li>Conclusion</li></a><br><hr>
 </ol>
-<br>
+<br><br>
 
-
-<p><strong>&nbsp;</strong></p>
-<p><strong>&nbsp;</strong></p>
-<p><strong>Introduction</strong></p>
+<h2 id="#introduction">1. Introduction</h2>
+<h3>1.1 Project Idea:</h3>
 <p>Tutoring students is the most common job for students and young adults in Bangladesh. However, the process of finding tuition offers is difficult and can be troublesome for some. Along with that, finding a suitable tutor for your child takes time and background checks. Having a place where tuition offers and tutors are located together can make both of these jobs much easier.</p>
-<p>The goal of this project is to create a web app where tutors have access to available tuition offers and parents get access to a plethora of tutors and a means to contact them.</p>
+<p>The goal of this project is to create a web app where tutors have access to available tuition offers and parents get access to a plethora of tutors and a means to contact them. Users will be able to see tuition offers and their information, like location and salary, upfront. They will also be able to see the background information of the tutors that want to offer their services.</p>
+
+
 <p><strong>Features</strong></p>
 <ul>
 <li>Users can create and account and sign up using email.</li>
