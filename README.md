@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="250" height="280" src="documentation/images/nsu-logo.png">
+  <img width="250" height="280" src="Documentation/images/nsu-logo.png">
 </p>                                        
 
   <h1 align="center">Project Name: Tutor Connect</h1>
@@ -13,6 +13,18 @@
   Email: <a href="mailto:samiya.kazi@northsouth.edu"> samiya.kazi@northsouth.edu</a> </h2>
   <br><br>
 
+
+<h2> Project Name: Tutor Connect </h2><br>
+<h3 id="table-of-contents">Table of Contents: </h3>
+
+<ol>
+  <a href="#introduction"><li>Introduction</li><br></a>
+  <a href="#features"><li>Software Specification</li><br></a>
+  <a href="#technology"><li>Technology</li><br></a>
+  <a href="#businessplan"><li>Business Plan/Monetization</li></a><br>
+  <a href="#conclusion"><li>Conclusion</li></a><br><hr>
+</ol>
+<br>
 
 
 <p><strong>&nbsp;</strong></p>
