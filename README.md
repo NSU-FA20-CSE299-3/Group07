@@ -29,7 +29,7 @@
 <h2 id="introduction">1. Introduction</h2>
 <h3>1.1 Project Idea:</h3>
 <p>Tutoring students is the most common job for students and young adults in Bangladesh. However, the process of finding tuition offers is difficult and can be troublesome for some. Along with that, finding a suitable tutor for your child takes time and background checks. Having a place where tuition offers and tutors are located together can make both of these jobs much easier.</p>
-<p>The goal of this project is to create a web app where tutors have access to available tuition offers and parents get access to a plethora of tutors and a means to contact them. Users will be able to see tuition offers and their information, like location and salary, upfront. They will also be able to see the background information of the tutors that want to offer their services.</p>
+<p>The goal of this project is to create a web application where tutors have access to available tuition offers and parents get access to a plethora of tutors and a means to contact them. Users will be able to see tuition offers and their information, like location and salary, upfront. They will also be able to see the background information of the tutors that want to offer their services.</p>
 
 <h2 id="features">2. Software Specification</h2>
 <p>The features of this project are the following &ndash;
@@ -99,7 +99,7 @@
 <p><em>Backend:</em></p>
 <p>For the backend of the web application, Node.js was used to manage packages and scripts.</p>
 <p><em>Database:</em></p>
-<p>As the usage of Firebase Cloud Functions was not free to use, it was not used to write functions to fetch and update data for the application. Cloud Firestore was used as the database to store data and there were two main collections, "users" and "offers", and an subcollection in each offer document called "answers." Firebase Authentication was used to register and sign in users.</p>
+<p>As the usage of Firebase Cloud Functions was not free to use, it was not used to write functions to fetch and update data for the application. The commands were implemented in the React components themselves. Cloud Firestore was used as the database to store data and there were two main collections, "users" and "offers", and an subcollection in each offer document called "answers." Firebase Authentication was used to register and sign in users.</p>
 
 
 
@@ -109,3 +109,4 @@
 <p>Tutors can pay a membership fee when signing up of BDT 500. The payment will be taken through bKash. I will be using bKash as it is the most popular medium for online transactions. If the application is approved for Google AdSense, Google ads will also be a way to monetize the application.</p>
 
 <h2 id="conclusion">5. Conclusion</h2>
+<p>In conclusion, Tutor Connect is a web application that is designed to make finding work as a tutor easier along with finding a suitable tutor for your child. Most of the features proposed for the project were implemented except a messaging feature and a payment option during sign up. During the implementation process issues arose while trying to use Firebase Cloud Functions. To deal with this, functions were not written to fetch and update data from the database and commands for these operations were implemented in the React components. Not all technology tools were used in the project, like Redux, as they were not required. However, these tools may be required when more features are added to the application in the future. I plan on expanded the range of features for this application in future and better its performance and user experience.</p>
