@@ -86,13 +86,22 @@
 <h2 id="technology">3. Technology</h2>
 <h3>3.1 Proposed Technology Stack</h3>
 <p><em>Frontend:</em></p>
-<p>For the front-end I will use HTML, CSS, React, and Material-UI. The web app will be compatible with both PC and mobile browsers. Redux will help with managing component states while Material-UI will ensure compatibility between platforms.</P>
+<p>For the front-end I will use HTML, CSS, React, and Material-UI. The web application will be compatible with both PC and mobile browsers. Redux will help with managing component states while Material-UI will ensure compatibility between platforms.</P>
 <p><em>Backend:</em></p>
 <p>For the backend of the web application, I will be using Node.js to manage packages and scripts.</p>
 <p><em>Database:</em></p>
-<p>For the database aspect of the project I will use Firebase, more specifically Cloud Firestore. This will allow us to have a real-time NoSql database and provide login authentication.</p>
+<p>For the database aspect of the project I will use Firebase, more specifically Firebase Cloud Functions and Cloud Firestore. This will allow us to have a real-time NoSql database and provide login authentication.</p>
 
 <h3>3.2 Implemented Technology</h3>
+<p><em>Frontend:</em></p>
+<p>HTML, CSS, React, and Material-UI were all used to build the front-end portion of the web application. React was the base of the application while Material-UI allowed use of components with cross-platform compatibility. These include components like forms, typography, and Material-UI grid.</p>
+<p>Redux was not used for state management in the application as it was not required in most cases. Most of the data in the application's components could be passed down to other components through props. This eliminated the need for using Redux as a state management tool.</p>
+<p><em>Backend:</em></p>
+<p>For the backend of the web application, Node.js was used to manage packages and scripts.</p>
+<p><em>Database:</em></p>
+<p>As the usage of Firebase Cloud Functions was not free to use, it was not used to write functions to fetch and update data for the application. Cloud Firestore was used as the database to store data and there were two main collections, "users" and "offers", and an subcollection in each offer document called "answers." Firebase Authentication was used to register and sign in users.</p>
+
+
 
 
 
